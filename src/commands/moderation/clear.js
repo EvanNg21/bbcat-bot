@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('clear')
-		.setDescription('clears last 5 messages')
+		.setDescription('clears last amount of messages')
         
         .addIntegerOption(option => 
         option.setName('amount')
