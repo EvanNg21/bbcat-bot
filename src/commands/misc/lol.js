@@ -66,11 +66,6 @@ module.exports = {
     
           const tftStats = tftStatsResponse.data;
 
-          
-          
-    
-         
-    
           // Process and display the stats
           
           let statsText = `Stats for Summoner: ${summonerInfo.name}\n\n`;
@@ -79,7 +74,8 @@ module.exports = {
             statsText += `Tier: ${stat.tier} ${stat.rank}\n`;
             statsText += `LP: ${stat.leaguePoints}\n`;
             statsText += `Wins: ${stat.wins}\n`;
-            statsText += `Losses: ${stat.losses}\n\n`;
+            statsText += `Losses: ${stat.losses}\n`;
+            statsText += 'Winrate: ' + (Math.round(stat.wins/(stat.losses+stat.wins)*100))+'%\n\n';
           });
           //display tft stats
           statsText += 'TFT Stats: \n';
@@ -88,7 +84,8 @@ module.exports = {
             statsText += `Tier: ${stat.tier} ${stat.rank}\n`;
             statsText += `LP: ${stat.leaguePoints}\n`;
             statsText += `Wins: ${stat.wins}\n`;
-            statsText += `Losses: ${stat.losses}\n\n`;
+            statsText += `Losses: ${stat.losses}\n`;
+            statsText += 'Winrate: ' + (Math.round(stat.wins/(stat.losses+stat.wins)*100))+'%\n\n';
           });
           const embed = new EmbedBuilder()
             .setColor("Yellow")
