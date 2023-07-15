@@ -40,35 +40,10 @@ module.exports = {
           );
 
           const rankedStats = rankedStatsResponse.data;
-            //finds tft summoner info
-          const tftSummonerInfoResponse = await axios.get(
-            `https://na1.api.riotgames.com/tft/summoner/v1/summoners/by-name/${encodeURIComponent(
-              summonerName
-            )}`,
-            {
-              headers: {
-                'X-Riot-Token': apiKey,
-              },
-            }
-          );
-    
-          const tftSummonerInfo = tftSummonerInfoResponse.data;
-    
-          // Get TFT ranked stats
-          const tftStatsResponse = await axios.get(
-            `https://na1.api.riotgames.com/tft/league/v1/entries/by-summoner/${tftSummonerInfo.id}`,
-            {
-              headers: {
-                'X-Riot-Token': apiKey,
-              },
-            }
-          );
-    
-          const tftStats = tftStatsResponse.data;
-
+            
           // Process and display the stats
           
-          let statsText = `Stats for Summoner: ${summonerInfo.name}\n\n`;
+          let statsText = `Ranked Stats\n\n`;
           rankedStats.forEach((stat) => {
             statsText += `Queue: ${stat.queueType}\n`;
             statsText += `Tier: ${stat.tier} ${stat.rank}\n`;
@@ -77,19 +52,10 @@ module.exports = {
             statsText += `Losses: ${stat.losses}\n`;
             statsText += 'Winrate: ' + (Math.round(stat.wins/(stat.losses+stat.wins)*100))+'%\n\n';
           });
-          //display tft stats
-          statsText += 'TFT Stats: \n';
-          tftStats.forEach((stat)=> {
-            statsText += `Queue: ${stat.queueType}\n`;
-            statsText += `Tier: ${stat.tier} ${stat.rank}\n`;
-            statsText += `LP: ${stat.leaguePoints}\n`;
-            statsText += `Wins: ${stat.wins}\n`;
-            statsText += `Losses: ${stat.losses}\n`;
-            statsText += 'Winrate: ' + (Math.round(stat.wins/(stat.losses+stat.wins)*100))+'%\n\n';
-          });
+          
           const embed = new EmbedBuilder()
             .setColor("Yellow")
-            .addFields({name:'League of Legends Stats' ,value: statsText});
+            .addFields({name:`Summoner Stats for: ${summonerName}` ,value: statsText});
         
         await interaction.reply({embeds:[embed]});
     } catch (error) {
