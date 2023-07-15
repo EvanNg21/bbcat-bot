@@ -97,7 +97,7 @@ module.exports = {
                 const seconds = totalSeconds % 60;
                 statsText += `Match ID: ${matchResult.gameId}\n`;
                 statsText += `Game Duration: ${minutes}:${seconds < 10 ? '0' : ''}${Math.round(seconds)}\n`;
-                statsText += `Date: ${Date(matchResult.date)}\n`;
+                statsText += `Date: ${new Date(matchResult.date)}\n`;
                 statsText += `Place: ${matchResult.place}\n`;
                 statsText += `Level: ${matchResult.level}\n\n`;
                 

@@ -30,12 +30,14 @@ module.exports = {
                 const matchResponse = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${apiKey}`);
                 const matchData = matchResponse.data;
                 const matchResult = {
-                    gameId: matchData.metadata.matchId,
+                    gameId: matchData.metadata.matchId,                      
                     gameDuration: matchData.info.gameDuration,
                     gameCreation: matchData.info.gameCreation,
+                    gameMode: matchData.info.queueId,
                     win: false,
                     player: null,
                 };
+
 
                 // Find the participant data for the summoner
                 const participant = matchData.info.participants.find(p => p.puuid === puuid);
@@ -61,9 +63,29 @@ module.exports = {
                 const totalSeconds = matchResult.gameDuration;
                 const minutes = Math.floor(totalSeconds / 60);
                 const seconds = totalSeconds % 60;
+                let queue = matchResult.gameMode;
+                if(queue==420){
+                    queue ="Ranked Solo/Duo";
+                }
+                else if(queue==440){
+                    queue ="Ranked Flex";
+                }
+                else if(queue==450){
+                    queue ="ARAM";
+                }
+                else if(queue==400){
+                    queue ="Draft Pick"
+                }
+                else if(queue==400){
+                    queue ="Blind Pick"
+                }
+                else{
+                    queue ="Other";
+                }
                 resultText += `Game ID: ${matchResult.gameId}\n`;
-                resultText += `Date: ${Date(matchResult.gameCreation)}`;
+                resultText += `Date: ${new Date(matchResult.gameCreation)}\n`;
                 resultText += `Game Duration: ${minutes}:${seconds < 10 ? '0' : ''}${seconds} \n`;
+                resultText += `Game Mode: ${queue}\n`;
                 resultText += `Result: ${result}\n`;
 
                 if (matchResult.player) {
