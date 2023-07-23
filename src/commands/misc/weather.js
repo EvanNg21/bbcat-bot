@@ -17,7 +17,7 @@ module.exports = {
         const response = await axios.get(
             `http://api.weatherstack.com/current?access_key=${apiKey}&query=${location}`
         );
-
+        
         const weatherData = response.data.current;
         const temperature = weatherData.temperature;
         const tempf = Math.round(temperature * 9 / 5) + 32;
@@ -26,12 +26,18 @@ module.exports = {
         const windSpeed = weatherData.wind_speed;
         const windMph = (Math.round(windSpeed/1.609344));
         const uv = weatherData.uv_index;
+        const feel = weatherData.feelslike;
+        const feelf = Math.round(feel * 9 / 5) + 32;
+        const windDir = weatherData.wind_dir;
+        const clouds = weatherData.cloudcover; 
+        
         
 
-        await interaction.reply(`The current weather in ${location} is ${description} with a temperature of ${tempf}°F.
+        await interaction.reply(`The current weather in ${location} is ${description} with a temperature of ${tempf}°F, but feels like ${feelf}°F.
         Humidity: ${humid}%
-        WindSpeed: ${windMph} mph
-        UV Index: ${uv} (1-11+)`);
+        Wind: ${windMph} mph, heading ${windDir}
+        UV Index: ${uv} (1-11+)
+        CloudCover: ${clouds}%`);
         
         } catch (error) {
         console.error(error);
