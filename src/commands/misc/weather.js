@@ -20,6 +20,7 @@ module.exports = {
         
         const weatherData = response.data.current;
         const temperature = weatherData.temperature;
+        const prec = weatherData.precip;
         const tempf = Math.round(temperature * 9 / 5) + 32;
         const description = weatherData.weather_descriptions[0];
         const humid = weatherData.humidity;
@@ -37,7 +38,8 @@ module.exports = {
         Humidity: ${humid}%
         Wind: ${windMph} mph, heading ${windDir}
         UV Index: ${uv} (1-11+)
-        CloudCover: ${clouds}%`);
+        CloudCover: ${clouds}%
+        Precipitation: ${prec}`);
         
         } catch (error) {
         console.error(error);
