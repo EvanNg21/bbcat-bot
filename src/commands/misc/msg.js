@@ -28,8 +28,9 @@ module.exports = {
 
     try {
       // Send a direct message to the mentioned user
+      
       await user.send(message);
-
+  
       // Reply to the interaction to confirm the message was sent, and set it as ephemeral
       await interaction.reply({ content: 'Message sent!', ephemeral: true });
     } catch (error) {
