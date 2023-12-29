@@ -13,7 +13,7 @@ module.exports = {
 	async execute(interaction) {
        
        try{
-        const apiKey = 'RGAPI-1853f676-81ec-460d-adb3-89ce7061c506';
+        const apiKey = 'RGAPI-d4d4e798-2194-4ac1-9fc5-662bee1e24ab';
         const summonerName = interaction.options.getString('summoner_name');
         //finds summoner info
         const summonerInfoResponse = await axios.get(

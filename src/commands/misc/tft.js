@@ -12,7 +12,7 @@ module.exports = {
         ),
     async execute(interaction) {
         try {
-            const apiKey = 'RGAPI-6a3b83ca-b415-40cb-99c2-6034a3693bfd';
+            const apiKey = 'RGAPI-d4d4e798-2194-4ac1-9fc5-662bee1e24ab';
             const summonerName = interaction.options.getString('summoner_name');
 
             const tftSummonerInfoResponse = await axios.get(
