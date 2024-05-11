@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
-const apiKey = '450707fc8e0bd6677fedbdb45742a3be';
+const apiKey = '027e12c0a7b30e999d68779289cf095a';
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('weather')
