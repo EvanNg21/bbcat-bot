@@ -1,7 +1,11 @@
 const { REST, Routes } = require('discord.js');
-const { clientId, guildId, token } = require('./config.json');
 const fs = require('node:fs');
 const path = require('node:path');
+require('dotenv').config();
+
+const token = process.env.DISCORD_TOKEN;
+const clientId = process.env.CLIENT_ID;
+
 
 const commands = [];
 // Grab all the command folders from the commands directory you created earlier
@@ -30,13 +34,27 @@ const rest = new REST().setToken(token);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
+		const existingCommands = await rest.get(Routes.applicationCommands(clientId));
+        console.log("Existing Commands:", existingCommands);
+		
+		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 		// The put method is used to fully refresh all commands in the guild with the current set
 		await rest.put(
 			Routes.applicationCommands(clientId),
 			{ body: commands },
 		);
+		
+
+		const entryPointCommand = existingCommands.find(cmd => cmd.name === 'entry-point-command-name');
+        if (entryPointCommand) {
+            commands.push(entryPointCommand);
+        }
+
+		await rest.put(
+            Routes.applicationCommands(clientId),
+            { body: commands },
+        );
 
 		console.log(`Successfully reloaded application (/) commands.`);
 	} catch (error) {

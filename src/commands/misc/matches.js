@@ -2,6 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 const itemData = require('./itemData.json');
+require('dotenv').config();
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('lastgames')
@@ -18,7 +20,7 @@ module.exports = {
         ),
     async execute(interaction) {
         try {
-            const apiKey = 'RGAPI-47eb2ea4-b804-4d5a-8b42-ac80af687b5a';
+            const apiKey = process.env.LOL_KEY;
             const riotId = interaction.options.getString('riot_id');
             const tagline = interaction.options.getString('tagline');
             console.log('ID: ' + riotId);

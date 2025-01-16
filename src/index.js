@@ -3,8 +3,9 @@ const {Client, Events, Collection, GatewayIntentBits}= require("discord.js");
 const { joinVoiceChannel } = require('@discordjs/voice');
 const fs = require('node:fs');
 const path = require('node:path');
-const { token } = require ('./config.json');
 const {player} = require('discord-player');
+
+const token = process.env.DISCORD_TOKEN;
 
 const client = new Client ({
     intents: [
