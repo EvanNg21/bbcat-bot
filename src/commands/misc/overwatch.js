@@ -22,7 +22,7 @@ module.exports = {
         ),
     async execute(interaction) {
         try {
-            
+
             const owName = interaction.options.getString('name');
             const owTag = interaction.options.getString('battletag');
             const hero = interaction.options.getString('hero');
