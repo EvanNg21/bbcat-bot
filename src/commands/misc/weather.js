@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const axios = require('axios');
 require('dotenv').config();
 
@@ -14,7 +14,7 @@ module.exports = {
     async execute(interaction) {
         const location = interaction.options.getString('location');
         try {
-            await interaction.deferReply({ ephemeral: false});
+            await interaction.deferReply();
             console.log("deffered")
 
             const response = await axios.get(
@@ -45,7 +45,7 @@ module.exports = {
                 Precipitation: ${prec}`);
         } catch (error) {
             console.error(error);
-            await interaction.followUp({ content: 'There was an error fetching weather data.', ephemeral: true });
+            await interaction.followUp({ content: 'There was an error fetching weather data.', flags: MessageFlags.Ephemeral });
         }
     }
 };
